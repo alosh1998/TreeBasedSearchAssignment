@@ -100,13 +100,13 @@ class nPuzzler
 		
 			//work out the "physical" size of the puzzle
 			//here we only deal with NxN puzzles, so the puzzle size is taken to be the first number
-			int puzzleSize = Integer.parseInt(bothDimensions[0]);
+			int puzzleSize = Integer.parseInt(bothDimensions[0]); // first int
 			
 			int[][] startPuzzleGrid = new int[puzzleSize][puzzleSize];
 			int[][] goalPuzzleGrid = new int[puzzleSize][puzzleSize];
 			
 			//fill in the start state
-			String startStateString = puzzle.readLine();
+			String startStateString = puzzle.readLine(); //read the first line of int
 			startPuzzleGrid = ParseStateString(startStateString, startPuzzleGrid, puzzleSize);
 			
 			//fill in the end state

@@ -45,7 +45,8 @@ public class PuzzleState implements Comparable<PuzzleState>
 	{
 		EvaluationFunction = value;
 	}
-	
+
+	// according to the empty cells, returns array of direction to move to
 	public direction[] getPossibleActions()
 	{
 		//find where the blank cell is and store the directions.
@@ -61,7 +62,7 @@ public class PuzzleState implements Comparable<PuzzleState>
 			System.out.println("There was an error in processing! Aborting...");
 			System.exit(1);
 		}
-		result = new direction[countMovements(blankLocation)];
+		result = new direction[countMovements(blankLocation)]; //3
 		int thisIndex = 0;
 		if(blankLocation[0] == 0)
 		{
@@ -94,7 +95,8 @@ public class PuzzleState implements Comparable<PuzzleState>
 		}
 		return result;
 	}
-	
+
+	//
 	private int countMovements(int[] blankLocation)
 	{
 		int result = 2;
@@ -118,10 +120,13 @@ public class PuzzleState implements Comparable<PuzzleState>
 		catch (InvalidPuzzleException e)
 		{
 			//do something
+			System.out.println("There was an error, movements can't be determined");
 		}
 		return result;
 	}
-	
+
+
+	// find the cells with no number
 	private int[] findBlankCell() throws InvalidPuzzleException
 	{
 		for(int i = 0; i < Puzzle.length; i++)
@@ -138,7 +143,8 @@ public class PuzzleState implements Comparable<PuzzleState>
 		//No blank cell found?
 		throw new InvalidPuzzleException(this);
 	}
-	
+
+	// clone CloneMe to new array and return it
 	private int[][] cloneArray(int[][] cloneMe)
 	{
 		int[][] result = new int[cloneMe.length][cloneMe[0].length];
@@ -151,7 +157,9 @@ public class PuzzleState implements Comparable<PuzzleState>
 		}
 		return result;
 	}
-	
+
+
+	// this method will move the empty cell, and return new state
 	public PuzzleState move(direction aDirection) throws CantMoveThatWayException
 	{
 		//Moving up moves the empty cell up (and the cell above it down)
@@ -201,7 +209,8 @@ public class PuzzleState implements Comparable<PuzzleState>
 			throw new CantMoveThatWayException(this, aDirection);
 		}
 	}
-	
+
+	// check if two PuzzleStates are the same, by checking their elements
 	@Override
 	public boolean equals(Object aObject) throws ClassCastException
 	{
@@ -212,7 +221,7 @@ public class PuzzleState implements Comparable<PuzzleState>
 			for(int j = 0; j < Puzzle[i].length; j++)
 			{
 				if(this.Puzzle[i][j] != aState.Puzzle[i][j])
-					return false;		//stop checking as soon as we find an 
+					return false;		//stop checking as soon as we find an
 										// element that doesn't match
 			}
 		}
@@ -224,10 +233,10 @@ public class PuzzleState implements Comparable<PuzzleState>
 	{
 		return EvaluationFunction - aState.getEvaluationFunction();
 	}
-	
+
+	//populate children
 	public ArrayList<PuzzleState> explore()
 	{
-		//populate children
 		direction[] possibleMoves = getPossibleActions();
 		Children = new ArrayList<PuzzleState>();
 		for(int i = 0; i < possibleMoves.length; i++)
@@ -244,7 +253,8 @@ public class PuzzleState implements Comparable<PuzzleState>
 		}	
 		return Children;
 	}
-	
+
+	// get directions to parent
 	public direction[] GetPathToState()
 	{
 		direction result[];

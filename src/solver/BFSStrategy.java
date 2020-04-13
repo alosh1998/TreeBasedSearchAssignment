@@ -22,7 +22,8 @@ public class BFSStrategy extends SearchMethod {
 	}
 	
 	@Override
-	public direction[] Solve(nPuzzle puzzle) {
+	public direction[] Solve(nPuzzle puzzle)
+	{
 		//This method uses the fringe as a queue.
 		//Therefore, nodes are searched in order of cost, with the lowest cost
 		// unexplored node searched next.
